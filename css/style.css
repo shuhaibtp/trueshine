@@ -463,53 +463,175 @@ h2 {
 
 /* Process */
 .process {
-    background: var(--white);
+    position: relative;
+    /* Use an existing image or fallback color */
+    background: url('../assets/images/hero-bg-technician.png') no-repeat center center/cover;
+    background-attachment: fixed;
+    color: var(--white);
+    padding: 100px 0;
+}
+
+.process::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 30, 60, 0.92);
+    /* Heavy Dark Blue Overlay */
+    z-index: 0;
+}
+
+.process .container {
+    position: relative;
+    z-index: 1;
+}
+
+.process .section-header h2 {
+    color: var(--white);
+}
+
+.process .section-header p {
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .process-steps {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 20px;
     position: relative;
-    text-align: center;
+    margin-top: 50px;
 }
 
 .step {
     flex: 1;
-    min-width: 150px;
+    text-align: center;
     position: relative;
+    padding: 0 10px;
+    z-index: 2;
 }
 
-.step-number {
-    width: 40px;
-    height: 40px;
-    background: var(--primary-color);
-    color: var(--white);
+.step-icon {
+    width: 90px;
+    height: 90px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    margin: 0 auto 15px;
+    margin: 0 auto 25px;
+    font-size: 2rem;
+    color: var(--secondary-color);
     position: relative;
-    z-index: 2;
+    transition: var(--transition);
+}
+
+.step:hover .step-icon {
+    background: var(--white);
+    color: var(--primary-color);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.step-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 28px;
+    height: 28px;
+    background: var(--accent-color);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 0.9rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--primary-color);
+}
+
+.step-content h4 {
+    color: var(--white);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.step-content p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
 }
 
 .step-connector {
-    display: none;
-    /* Hidden on mobile */
     flex: 1;
     height: 2px;
-    background: #ddd;
-    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    margin-top: 45px;
+    position: relative;
+    min-width: 20px;
 }
 
-@media (min-width: 768px) {
+/* Responsive Mobile Process */
+@media (max-width: 768px) {
+    .process {
+        background-attachment: scroll;
+        /* Disable parallax on mobile for performance */
+    }
+
+    .process-steps {
+        flex-direction: column;
+        gap: 0;
+        padding-left: 20px;
+    }
+
+    /* Vertical Line */
+    .process-steps::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 55px;
+        /* Center of 70px icon (35 + 20) */
+        width: 2px;
+        background: rgba(255, 255, 255, 0.2);
+        z-index: 0;
+    }
+
     .step-connector {
-        display: block;
-        max-width: 50px;
+        display: none;
+    }
+
+    .step {
+        display: flex;
+        align-items: flex-start;
+        text-align: left;
+        margin-bottom: 40px;
+        width: 100%;
+        padding: 0;
+    }
+
+    /* Smaller Icons for Mobile */
+    .step-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.5rem;
+        margin: 0 20px 0 0;
+        flex-shrink: 0;
+        background: var(--primary-color);
+        /* Solid bg for visibility */
+        border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .process-steps::before {
+        left: 55px;
+        /* 20px padding + 35px center */
+    }
+
+    .step-content {
+        padding-top: 5px;
     }
 }
 
